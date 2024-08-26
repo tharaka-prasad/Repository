@@ -4,6 +4,7 @@ namespace App\Http\Controllers\categories;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Repositories\All\Categories\CategoryInterface;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,7 +15,10 @@ class categoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categoryInterface = app()->make(CategoryInterface::class);
+        $categories= $categoryInterface->all();
+
+        // $categories = Category::all();
         return Inertia::render('categories/All/Index', [
             'categories' => $categories
         ]);
