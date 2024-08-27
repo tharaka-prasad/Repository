@@ -3,14 +3,13 @@
 @tailwind utilities;
 
 
-/* General form styling */
 form {
     max-width: 600px;
     margin: auto;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+    background-color: #30cfd4;
   }
 
   h1 {
@@ -67,21 +66,22 @@ form {
   table {
     width: 100%;
     border-collapse: collapse;
+    border: 22px solid #000000;
     margin-bottom: 20px;
   }
 
   th, td {
-    border: 1px solid #dddddd;
+    border: 2px solid #000000;
     text-align: left;
     padding: 8px;
   }
 
   th {
-    background-color: #f4f4f4;
+    background-color: #dee762;
   }
 
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
+  tr {
+    background-color: #b7d7db;
   }
 
   /* Button spacing */
@@ -101,7 +101,7 @@ form {
   }
 
   .text-green-600 {
-    color: #38a169;
+    color: #18693e;
   }
 
   .text-blue-600 {
@@ -110,4 +110,19 @@ form {
 
   .text-red-600 {
     color: #e53e3e;
+  }
+  .dashboard-background {
+    background-image: url('/Image/dashboard.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.product-page {
+    background-image: url('/Image/dashboard.jpg'); /* Path to your background image */
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating */
+    padding: 20px; /* Add padding to the content */
+    min-height: 100vh; /* Ensure it covers the full viewport height */
+    color: #fff; /* Text color for better contrast on background */
   }

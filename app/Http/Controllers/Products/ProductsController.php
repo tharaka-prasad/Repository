@@ -49,7 +49,7 @@ class productsController extends Controller
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
             'status' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8192',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:8192',
         ]);
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('products', 'public');
@@ -110,7 +110,7 @@ class productsController extends Controller
         'price' => 'nullable|numeric',
         'category_id' => 'nullable|exists:categories,id',
         'status' => 'nullable|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8192', // Image validation
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:8192', // Image validation
     ]);
 
     // Handle the image upload if a new image is provided

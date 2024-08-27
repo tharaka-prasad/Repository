@@ -11,9 +11,17 @@ export default function Dashboard({ auth }: PageProps) {
             <Head title="Dashboard" />
 
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 text-center dashboard-bg"> {/* Add the background class */}
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900 dark:text-gray-100">You're logged in!</div>
+                        <div className="p-6 text-gray-900 dark:text-gray-100">
+                            😘    පුංචි අපේ සෙල්ලම් බඩු කඩේට  එන්න ඇවිත් යන්න!!!!!!!!😘
+                        </div>
+                        <div className="p-6 text-gray-900 dark:text-gray-100">
+                            😘           Little come and go to our toy shop!!!!!!!!!!!!!!!😘
+                        </div>
+                        <div className="p-6 text-gray-900 dark:text-gray-100">
+                            😘     கொஞ்சம் வந்து நம்ம பொம்மை கடைக்கு போ!!!!!!!😘
+                        </div>
                     </div>
                 </div>
             </div>

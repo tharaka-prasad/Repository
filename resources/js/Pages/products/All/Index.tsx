@@ -2,6 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { PageProps } from '@/types';
 
+
 interface Category {
     id: number;
     name: string;
@@ -34,7 +35,7 @@ export default function Products({ auth, products }: ProductsProps) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <div className="flex justify-between items-center mb-6">
+                            <div className="flex justify-between items-center mb-4">
                                 <h3 className="text-lg font-medium">Product List</h3>
                                 <Link
                                     href={route('products.create')}

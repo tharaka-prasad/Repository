@@ -23,8 +23,7 @@ class categoriesController extends Controller
 
     public function index()
     {
-        $categoryInterface = app()->make(CategoryInterface::class);
-        $categories= $categoryInterface->all();
+        $categories = $this->categoryInterface->all(); //$this->categoryInterface->all();
 
         // $categories = Category::all();
         return Inertia::render('categories/All/Index', [
@@ -38,8 +37,7 @@ class categoriesController extends Controller
      */
     public function create()
     {
-        $categoryInterface = app()->make(CategoryInterface::class);
-        $categories= $categoryInterface->all();
+        $categories = $this->categoryInterface->all();
         return Inertia::render('categories/Create/Index');
     }
 
@@ -53,7 +51,7 @@ class categoriesController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        Category::create($request->only('name', 'description'));
+        $this->categoryInterface->create($request->all());
 
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
@@ -62,7 +60,8 @@ class categoriesController extends Controller
      */
     public function show(string $id)
     {
-        $category = Category::findOrFail($id);
+
+        $category = $this->categoryInterface->findById($id);
         return Inertia::render('categories/Show/Index', [
             'category' => $category
         ]);
@@ -73,7 +72,7 @@ class categoriesController extends Controller
      */
     public function edit(string $id)
     {
-        $category = Category::findOrFail($id);
+        $category = $this->categoryInterface->findById($id);
 
         return Inertia::render('categories/Edit/Index', [
             'category' => $category,
@@ -86,12 +85,12 @@ class categoriesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $category = Category::findOrFail($id);
+        $this->categoryInterface->update($id, $request->all());
 
-        $category->update($request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-        ]));
+        ]);
 
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
@@ -102,8 +101,7 @@ class categoriesController extends Controller
     public function destroy(string $id)
         {
         // Find the category and delete it
-        $category = Category::findOrFail($id);
-        $category->delete();
+        $this->categoryInterface->deleteById($id);
 
         // Redirect to the categories index page
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
