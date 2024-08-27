@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
+use App\Models\Product;
 use App\Repositories\All\Products\ProductInterface;
 use Illuminate\Support\Facades\Storage;
 
@@ -77,28 +78,42 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
-    {
-        $validated = $request->validate([
-            'name' => 'nullable|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'nullable|numeric',
-            'category_id' => 'nullable|exists:categories,id',
-            'status' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:8192',
-        ]);
+    public function update(Request $request, string $id)
+{
+    $product = Product::findOrFail($id);
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('products', 'public');
-            $validated['image'] = $imagePath;
-        } else {
-            $validated['image'] = $this->productInterface->getById($id)->image;
+    // Debugging: Check if the image is being received
+    // dd($request->all()); // Uncomment this to see what is being received by the controller
+
+    // Validate the request data
+    $validated = $request->validate([
+        'name' => 'nullable|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'nullable|numeric',
+        'category_id' => 'nullable|exists:categories,id',
+        'status' => 'nullable|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:8192', // Image validation
+    ]);
+
+    // Handle the image upload if a new image is provided
+    if ($request->hasFile('image')) {
+        // Delete the old image if it exists
+        if ($product->image) {
+            Storage::delete('public/' . $product->image);
         }
 
-        $this->productInterface->update($id, $validated);
-
-        return redirect()->route('products.index')->with('success', 'Product updated successfully.');
+        $imagePath = $request->file('image')->store('products', 'public');
+        $validated['image'] = $imagePath;
+    } else {
+        $validated['image'] = $product->image;
     }
+
+    $product->update($validated);
+
+
+    return redirect()->route('products.index')->with('success', 'Product updated successfully.');
+}
+
 
     public function destroy($id)
     {
