@@ -1,3 +1,113 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* General form styling */
+form {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* Form field styling */
+  div {
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  textarea {
+    resize: vertical;
+    height: 100px;
+  }
+
+  /* Dropzone styling */
+  .dropzone {
+    border: 2px dashed #cccccc;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  .dropzone p {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .dropzone img {
+    margin-top: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f4f4f4;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  /* Button spacing */
+  .button-space {
+    margin-right: 8px;
+  }
+
+  /* Button styling */
+  a {
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+  }
+
+  a:hover {
+    opacity: 0.8;
+  }
+
+  .text-green-600 {
+    color: #38a169;
+  }
+
+  .text-blue-600 {
+    color: #3182ce;
+  }
+
+  .text-red-600 {
+    color: #e53e3e;
+  }

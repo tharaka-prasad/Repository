@@ -10,9 +10,17 @@ use Inertia\Inertia;
 
 class categoriesController extends Controller
 {
+
+    public function __construct(protected CategoryInterface $categoryInterface){
+
+    }
+
     /**
      * Display a listing of the resource.
+     *
      */
+
+
     public function index()
     {
         $categoryInterface = app()->make(CategoryInterface::class);
@@ -30,6 +38,8 @@ class categoriesController extends Controller
      */
     public function create()
     {
+        $categoryInterface = app()->make(CategoryInterface::class);
+        $categories= $categoryInterface->all();
         return Inertia::render('categories/Create/Index');
     }
 
