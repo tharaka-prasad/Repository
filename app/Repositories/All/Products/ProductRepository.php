@@ -22,4 +22,20 @@ class ProductRepository extends BaseRepository implements ProductInterface
     {
         $this->model = $model;
     }
+    public function getAll()
+    {
+        return Product::with('category')->get();
+    }
+
+    public function getById($id)
+    {
+        return Product::with('category')->findOrFail($id);
+    }
+    public function delete($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+    }
+
+
 }
