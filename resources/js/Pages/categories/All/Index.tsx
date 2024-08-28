@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm, router } from '@inertiajs/react';
 import { PageProps } from '@/types';
+import { useState } from 'react';
 
 interface Category {
     id: number;
@@ -13,10 +14,27 @@ interface CategoriesProps extends PageProps {
 }
 
 export default function Categories({ auth, categories }: CategoriesProps) {
+    // Define state for managing loading state
+    const [isLoading, setIsLoading] = useState(false);
+
+    // Handle auto-generate category
+    const handleAutoGenerateCategory = async () => {
+        setIsLoading(true);
+        try {
+            await router.post(route('categories.auto-generate'), {}, {
+                onSuccess: () => setIsLoading(false),
+                onError: () => setIsLoading(false),
+            });
+        } catch (error) {
+            console.error(error);
+            setIsLoading(false);
+        }
+    };
+
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-black-800  leading-tight">Categories</h2>}
+            header={<h2 className="font-semibold text-xl text-black-800 leading-tight">Categories</h2>}
         >
             <Head title="Categories" />
 
@@ -25,13 +43,22 @@ export default function Categories({ auth, categories }: CategoriesProps) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <div className="flex justify-between items-center mb-4">
-                            <h3 className="text-lg font-medium">Category List</h3>
-                                <Link
-                                    href={route('categories.create')}
-                                    className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                >
-                                    Create Category
-                                </Link>
+                                <h3 className="text-lg font-medium">Category List</h3>
+                                <div>
+                                    <Link
+                                        href={route('categories.create')}
+                                        className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
+                                    >
+                                        Create Category
+                                    </Link>
+                                    <button
+                                        onClick={handleAutoGenerateCategory}
+                                        disabled={isLoading}
+                                        className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                    >
+                                        {isLoading ? 'Generating...' : 'Auto-Generate Category'}
+                                    </button>
+                                </div>
                             </div>
 
                             {/* Table to display categories */}

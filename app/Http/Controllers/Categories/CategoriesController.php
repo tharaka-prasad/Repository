@@ -106,4 +106,19 @@ class categoriesController extends Controller
         // Redirect to the categories index page
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
+    public function autoGenerate()
+{
+    // Generate a random category name
+    $categoryName = 'Category ' . rand(1, 1000);
+
+    // Create the category
+    $category = Category::create([
+        'name' => $categoryName,
+        'description' => 'Auto-generated category',
+    ]);
+
+    // Redirect back with a success message
+    return redirect()->route('categories.index')->with('success', 'Category "' . $category->name . '" auto-generated successfully.');
+}
+
 }

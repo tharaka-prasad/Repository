@@ -26,8 +26,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('categories',CategoriesController::class);
     Route::resource('products',ProductsController::class);
-    
+
     Route::post('/products/{id}', [ProductsController::class, 'update']);
+    Route::post('/categories/auto-generate', [CategoriesController::class, 'autoGenerate'])->name('categories.auto-generate');
 
 
 
